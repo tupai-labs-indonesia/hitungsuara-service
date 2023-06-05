@@ -14,8 +14,9 @@ const User = require('./model/user');
 // Utils
 const multer = require('multer');
 const upload = multer();
-const { diskStorage } = require('./utils/disk-storage');
-const { register } = require('./utils/user');
+const { userStorage, teamStorage } = require('./utils/disk-storage');
+const { userRegister } = require('./utils/user');
+const { teamRegister } = require('./utils/team');
 
 // Basic Config
 try{
@@ -62,8 +63,12 @@ app.get('/api', (_req, res) => {
 });
 
 /* [START] User Route */
-app.post('/api/user/register', multer({storage: diskStorage}).single("photo"), (req, res) => register(req, res));
+app.post('/api/user/register', multer({storage: userStorage}).single("photo"), (req, res) => userRegister(req, res));
 /* [END] User Route */
+
+/* [START] Team Route */
+app.post('/api/team/register', multer({storage: teamStorage}).single("photo"), (req, res) => teamRegister(req, res));
+/* [END] Team Route */
 
 
 

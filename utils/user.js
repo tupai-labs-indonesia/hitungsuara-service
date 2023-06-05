@@ -1,6 +1,6 @@
 const User = require('../model/user');
 
-const register = (req, res) => {
+const userRegister = (req, res) => {
     const email = req.body.email;
 
     User.findOne({email}, (err, data) => {
@@ -37,4 +37,4 @@ const register = (req, res) => {
     });
 }
 
-module.exports = {register}
+module.exports = {userRegister}
