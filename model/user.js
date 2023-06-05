@@ -24,8 +24,8 @@ const userSchema = mongoose.Schema({
     phoneNumber: {type: String},
     address: addressSchema,
     tps: {type: String},
-    id_dapil: {type: String},
-    id_tim: {type: String},
+    dapil_id: {type: String},
+    team_id: {type: String},
     photo: {type: String},
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 

@@ -23,8 +23,8 @@ const userRegister = (req, res) => {
             city: req.body.city
         },
         tps: req.body.tps,
-        id_dapil: req.body.id_dapil,
-        id_tim: req.body.id_tim,
+        dapil_id: req.body.dapil_id,
+        team_id: req.body.team_id,
         photo: "uploads/users/" + req.file.filename
     });
   
