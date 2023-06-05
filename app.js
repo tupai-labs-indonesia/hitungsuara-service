@@ -11,12 +11,12 @@ require('dotenv/config');
 // Models
 const User = require('./model/user');
 
-// Utils
+// Services
 const multer = require('multer');
 const upload = multer();
-const { userStorage, teamStorage } = require('./utils/disk-storage');
-const { userRegister } = require('./utils/user');
-const { teamRegister } = require('./utils/team');
+const { userStorage, teamStorage } = require('./services/disk-storage');
+const { userRegister } = require('./services/user');
+const { teamRegister } = require('./services/team');
 
 // Basic Config
 try{
