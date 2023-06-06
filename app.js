@@ -18,6 +18,7 @@ const { userStorage, teamStorage, dapilStorage } = require('./services/disk-stor
 const { userRegister } = require('./services/user');
 const { teamRegister } = require('./services/team');
 const { dapilRegister } = require('./services/dapil');
+const { privilegeRegister, userPrivilegeRegister } = require('./services/privilege');
 
 // Basic Config
 try{
@@ -66,6 +67,11 @@ app.get('/api', (_req, res) => {
 /* [START] User Route */
 app.post('/api/user/register', multer({storage: userStorage}).single("photo"), (req, res) => userRegister(req, res));
 /* [END] User Route */
+
+/* [START] Privilege Route */
+app.post('/api/privilege/register', (req, res) => privilegeRegister(req, res));
+app.post('/api/privilege/user/register', (req, res) => userPrivilegeRegister(req, res));
+/* [END] Privilege Route */
 
 /* [START] Team Route */
 app.post('/api/team/register', multer({storage: teamStorage}).single("photo"), (req, res) => teamRegister(req, res));
