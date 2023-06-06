@@ -5,7 +5,7 @@ const dapilRegister = async (req, res) => {
     const newDapil = Dapil({
         city: req.body.city,
         province: req.body.province,
-        number: req.body.number,
+        ballot_number: req.body.ballot_number,
         photo: "uploads/dapils/" + req.file.filename
     });
   
