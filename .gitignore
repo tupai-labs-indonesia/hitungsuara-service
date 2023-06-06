@@ -1,3 +1,8 @@
 /node_modules
 .env
-/public/uploads
+/public/uploads/users/*
+/public/uploads/teams/*
+/public/uploads/candidates/*
+/public/uploads/votes/*
+/public/uploads/parties/*
+/public/uploads/dapils/*

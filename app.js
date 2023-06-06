@@ -14,9 +14,10 @@ const User = require('./model/user');
 // Services
 const multer = require('multer');
 const upload = multer();
-const { userStorage, teamStorage } = require('./services/disk-storage');
+const { userStorage, teamStorage, dapilStorage } = require('./services/disk-storage');
 const { userRegister } = require('./services/user');
 const { teamRegister } = require('./services/team');
+const { dapilRegister } = require('./services/dapil');
 
 // Basic Config
 try{
@@ -69,6 +70,10 @@ app.post('/api/user/register', multer({storage: userStorage}).single("photo"), (
 /* [START] Team Route */
 app.post('/api/team/register', multer({storage: teamStorage}).single("photo"), (req, res) => teamRegister(req, res));
 /* [END] Team Route */
+
+/* [START] Dapil Route */
+app.post('/api/dapil/register', multer({storage: dapilStorage}).single("photo"), (req, res) => dapilRegister(req, res));
+/* [END] Dapil Route */
 
 
 
