@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const dapilSchema = mongoose.Schema({
     city: {type: String, required: true, uppercase: true},
     province: {type: String, required: true, uppercase: true},
-    ballot_number: {type: Number},
+    number: {type: Number},
     photo: {type: String},
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 

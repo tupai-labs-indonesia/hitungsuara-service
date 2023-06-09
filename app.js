@@ -14,11 +14,13 @@ const User = require('./model/user');
 // Services
 const multer = require('multer');
 const upload = multer();
-const { userStorage, teamStorage, dapilStorage } = require('./services/disk-storage');
+const { userStorage, teamStorage, dapilStorage, partyStorage, candidateStorage } = require('./services/disk-storage');
 const { userRegister } = require('./services/user');
 const { teamRegister } = require('./services/team');
 const { dapilRegister } = require('./services/dapil');
 const { privilegeRegister, userPrivilegeRegister } = require('./services/privilege');
+const { partyRegister } = require('./services/party');
+const { candidateRegister } = require('./services/candidate');
 
 // Basic Config
 try{
@@ -69,8 +71,8 @@ app.post('/api/user/register', multer({storage: userStorage}).single("photo"), (
 /* [END] User Route */
 
 /* [START] Privilege Route */
-app.post('/api/privilege/register', (req, res) => privilegeRegister(req, res));
-app.post('/api/privilege/user/register', (req, res) => userPrivilegeRegister(req, res));
+app.post('/api/privilege/register', upload.none(), (req, res) => privilegeRegister(req, res));
+app.post('/api/privilege/user/register', upload.none(), (req, res) => userPrivilegeRegister(req, res));
 /* [END] Privilege Route */
 
 /* [START] Team Route */
@@ -81,8 +83,13 @@ app.post('/api/team/register', multer({storage: teamStorage}).single("photo"), (
 app.post('/api/dapil/register', multer({storage: dapilStorage}).single("photo"), (req, res) => dapilRegister(req, res));
 /* [END] Dapil Route */
 
+/* [START] Party Route */
+app.post('/api/party/register', multer({storage: partyStorage}).single("photo"), (req, res) => partyRegister(req, res));
+/* [END] Party Route */
 
-
+/* [START] Candidate Route */
+app.post('/api/candidate/register', multer({storage: candidateStorage}).single("photo"), (req, res) => candidateRegister(req, res));
+/* [END] Candidate Route */
 
 
 app.listen(port, () => {

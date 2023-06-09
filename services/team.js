@@ -3,6 +3,8 @@ const Team = require('../model/team');
 const teamRegister = async (req, res) => {
     const teamName = req.body.name.toUpperCase();
 
+    console.log(req.body)
+
     try{
         const teamExist = await Team.findOne({name: teamName});
         if(teamExist){
