@@ -37,4 +37,40 @@ const userRegister = (req, res) => {
     });
 }
 
-module.exports = {userRegister}
+const userLogin = async (req, res) => {
+    
+    const {username, password} = req.body;
+
+    if(username && password){
+        try{
+            const user = await User.findOne({username});
+        
+                if(user && user.validPassword(password)){
+                    const token = jwt.sign(
+                        { user_id: user._id, email, phoneNumber},
+                        process.env.TOKEN_KEY,
+                        {
+                          expiresIn: "2h",
+                        }
+                      );
+                      
+                      const data = user;
+                      data.token = token;
+
+                      req.session.user = data;
+                      return res.json(data);
+                }else{
+                    return res.status(400).json({
+                        error : "Kredensial tidak valid"
+                    });
+                }
+        }catch(err){
+            return res.json({error: err});
+        }
+    }else{
+        res.json({error: true, message: "Silahkan isi username dan password anda!"});
+    }
+
+}
+
+module.exports = {userRegister, userLogin}

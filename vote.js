@@ -15,7 +15,7 @@ const User = require('./model/user');
 const multer = require('multer');
 const upload = multer();
 const { userStorage, teamStorage, dapilStorage, partyStorage, candidateStorage } = require('./services/disk-storage');
-const { userRegister } = require('./services/user');
+const { userRegister, userLogin } = require('./services/user');
 const { teamRegister } = require('./services/team');
 const { dapilRegister } = require('./services/dapil');
 const { privilegeRegister, userPrivilegeRegister } = require('./services/privilege');
@@ -68,6 +68,7 @@ app.get('/api', (_req, res) => {
 
 /* [START] User Route */
 app.post('/api/user/register', multer({storage: userStorage}).single("photo"), (req, res) => userRegister(req, res));
+app.post('/api/user/login', upload.none(), (req, res) => userLogin(req, res));
 /* [END] User Route */
 
 /* [START] Privilege Route */
