@@ -1,4 +1,6 @@
 const User = require('../model/user');
+require('dotenv/config');
+const jwt = require('jsonwebtoken');
 
 const userRegister = (req, res) => {
     const email = req.body.email;
@@ -46,26 +48,31 @@ const userLogin = async (req, res) => {
             const user = await User.findOne({username});
         
                 if(user && user.validPassword(password)){
+
                     const token = jwt.sign(
-                        { user_id: user._id, email, phoneNumber},
+                        { user_id: user._id, email: user.email},
                         process.env.TOKEN_KEY,
                         {
                           expiresIn: "2h",
                         }
                       );
-                      
-                      const data = user;
-                      data.token = token;
 
-                      req.session.user = data;
-                      return res.json(data);
+                      const response = {
+                        error: false,
+                        data : user,
+                        token
+                    }
+
+                      req.session.user = user;
+                      return res.json(response);
                 }else{
                     return res.status(400).json({
-                        error : "Kredensial tidak valid"
+                        error : true,
+                        message : "Kredensial tidak valid"
                     });
                 }
         }catch(err){
-            return res.json({error: err});
+            return res.json({error: true, message: err});
         }
     }else{
         res.json({error: true, message: "Silahkan isi username dan password anda!"});
